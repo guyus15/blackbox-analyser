@@ -5,7 +5,7 @@
 #include "spdlog/spdlog.h"
 
 Window::Window(std::string title, const GLsizei width, const GLsizei height, const WindowMode mode)
-	: m_window{ nullptr }
+	: m_window_{ nullptr }
 {
 	WindowProperties properties;
 
@@ -23,43 +23,43 @@ Window::~Window()
 
 void Window::make_context_current() const
 {
-	glfwMakeContextCurrent(m_window);
+	glfwMakeContextCurrent(m_window_);
 }
 
 void Window::focus_window() const
 {
-	glfwFocusWindow(m_window);
+	glfwFocusWindow(m_window_);
 }
 
 void Window::maximise_window() const
 {
-	glfwMaximizeWindow(m_window);
+	glfwMaximizeWindow(m_window_);
 }
 
 void Window::restore_window() const
 {
-	glfwRestoreWindow(m_window);
+	glfwRestoreWindow(m_window_);
 }
 
 void Window::close_window() const
 {
-	glfwSetWindowShouldClose(m_window, true);
+	glfwSetWindowShouldClose(m_window_, true);
 }
 
 bool Window::should_close() const
 {
-	return glfwWindowShouldClose(m_window);
+	return glfwWindowShouldClose(m_window_);
 }
 
 GLFWwindow* Window::get_window_ptr() const
 {
-	return m_window;
+	return m_window_;
 }
 
 WindowDimensions Window::get_window_dimensions() const
 {
 	int width = 0, height = 0;
-	glfwGetWindowSize(m_window, &width, &height);
+	glfwGetWindowSize(m_window_, &width, &height);
 
 	WindowDimensions dimensions{};
 	dimensions.width = width;
@@ -70,16 +70,16 @@ WindowDimensions Window::get_window_dimensions() const
 
 void Window::initialise_window(const WindowProperties& properties)
 {
-	m_window = glfwCreateWindow(
-		static_cast<int>(properties.dimensions.width),
-		static_cast<int>(properties.dimensions.height),
+	m_window_ = glfwCreateWindow(
+		properties.dimensions.width,
+		properties.dimensions.height,
 		properties.title.c_str(),
 		properties.mode == WindowMode::FULLSCREEN ? glfwGetPrimaryMonitor() : nullptr,
 		nullptr);
 
-	if (m_window == nullptr)
+	if (m_window_ == nullptr)
 	{
-		spdlog::error("Failed to create GLFW window.");
+		SPDLOG_ERROR("Failed to create GLFW window.");
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
@@ -87,5 +87,5 @@ void Window::initialise_window(const WindowProperties& properties)
 
 void Window::destroy_window() const
 {
-	glfwDestroyWindow(m_window);
+	glfwDestroyWindow(m_window_);
 }

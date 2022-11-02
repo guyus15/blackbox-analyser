@@ -88,10 +88,14 @@ public:
 	 */
 	[[nodiscard]] GLFWwindow* get_window_ptr() const;
 
-	WindowDimensions get_window_dimensions() const;
+	/**
+	 * @brief Gets the dimensions of the window.
+	 * @return The window dimensions.
+	 */
+	[[nodiscard]] WindowDimensions get_window_dimensions() const;
 
 private:
-	GLFWwindow* m_window;
+	GLFWwindow* m_window_;
 
 	/**
 	 * @brief Creates a GLFW window from a set of window properties.

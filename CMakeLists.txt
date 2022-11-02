@@ -21,11 +21,12 @@ option(TEST "Build tests" OFF)
 option(DEBUG_LOG "Enable debug logging" ON)
 
 if (DEBUG_LOG)
-	add_compile_definitions(BX_LOG_DEBUG)
+	add_compile_definitions(BX_LOG_DEBUG_MODE)
 endif()
 
 set(TARGET_SOURCES src/main.cpp
 				   src/window.cpp
+				   src/application.cpp
 				   libs/glad/src/glad.c
 				   libs/imgui/imgui.cpp
 				   libs/imgui/imgui_demo.cpp
