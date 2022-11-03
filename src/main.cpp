@@ -1,6 +1,8 @@
 #include "application.h"
 #include "spdlog/spdlog.h"
 
+#include "menu_gui.h"
+
 int main()
 {
 #if defined(BX_LOG_DEBUG_MODE)

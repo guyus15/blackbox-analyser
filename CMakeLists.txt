@@ -27,6 +27,9 @@ endif()
 set(TARGET_SOURCES src/main.cpp
 				   src/window.cpp
 				   src/application.cpp
+				   src/gui_manager.cpp
+				   src/menu_gui.cpp
+				   src/demo_gui.cpp
 				   libs/glad/src/glad.c
 				   libs/imgui/imgui.cpp
 				   libs/imgui/imgui_demo.cpp

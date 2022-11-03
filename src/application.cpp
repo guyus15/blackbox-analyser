@@ -4,6 +4,10 @@
 #include "application.h"
 #include "window.h"
 
+#include "gui_manager.h"
+#include "menu_gui.h"
+#include "demo_gui.h"
+
 #include "spdlog/spdlog.h"
 
 #include <cstdlib>
@@ -28,6 +32,8 @@ void Application::run() const
 		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		m_gui_manager_->render();
+
 		glfwSwapBuffers(m_main_window_->get_window_ptr());
 		glfwPollEvents();
 	}
@@ -50,6 +56,14 @@ void Application::setup()
 
 	m_main_window_ = std::make_unique<Window>("Blackbox: Analyser", 1280, 720, WindowMode::WINDOWED);
 	m_main_window_->make_context_current();
+
+	// Create GUI targets.
+	auto* menu_gui = new MenuGui();
+	auto* demo_gui = new DemoGui();
+
+	m_gui_manager_ = std::make_unique<GuiManager>(*m_main_window_);
+	m_gui_manager_->register_gui(menu_gui);
+	m_gui_manager_->register_gui(demo_gui);
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
 	{
