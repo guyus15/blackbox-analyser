@@ -17,7 +17,8 @@ void GuiManager::initialise() const
     // Set up Dear ImGui context.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)90;
+
+    const ImGuiIO& io = ImGui::GetIO(); (void)io;
 
     // Set the Dear ImGui style.
     ImGui::StyleColorsDark();
@@ -39,6 +40,18 @@ void GuiManager::render() const
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+
+#ifdef IMGUI_HAS_VIEWPORT
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(viewport->GetWorkPos());
+    ImGui::SetNextWindowSize(viewport->GetWorkSize());
+    ImGui::SetNextWindowViewport(viewport->ID);
+#else
+    const auto [width, height] = m_target_window_.get_window_dimensions();
+
+    ImGui::SetNextWindowPos(ImVec2{ 0.0f, 0.0f });
+    ImGui::SetNextWindowSize(ImVec2{static_cast<float>(width), static_cast<float>(height)});
+#endif
 
     for (const auto& gui : m_registered_guis_)
     {

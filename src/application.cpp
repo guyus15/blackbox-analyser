@@ -6,7 +6,6 @@
 
 #include "gui_manager.h"
 #include "menu_gui.h"
-#include "demo_gui.h"
 
 #include "spdlog/spdlog.h"
 
@@ -59,11 +58,9 @@ void Application::setup()
 
 	// Create GUI targets.
 	auto* menu_gui = new MenuGui();
-	auto* demo_gui = new DemoGui();
 
 	m_gui_manager_ = std::make_unique<GuiManager>(*m_main_window_);
 	m_gui_manager_->register_gui(menu_gui);
-	m_gui_manager_->register_gui(demo_gui);
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
 	{
