@@ -7,7 +7,7 @@
 const std::string glsl_version = "#version 460";
 
 GuiManager::GuiManager(Window& target_window)
-    : m_target_window_{ std::move(target_window) }
+    : m_target_window_{ target_window }
 {
     initialise();
 }

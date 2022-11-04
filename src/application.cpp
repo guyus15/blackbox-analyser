@@ -21,6 +21,9 @@ Application::Application()
 
 Application::~Application()
 {
+	m_main_window_.reset();
+	m_gui_manager_.reset();
+
 	glfwTerminate();
 }
 

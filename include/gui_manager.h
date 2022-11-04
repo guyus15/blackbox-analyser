@@ -9,7 +9,7 @@
 class GuiManager
 {
 public:
-    GuiManager(Window& target_window);;
+    GuiManager(Window& target_window);
     ~GuiManager() { shutdown(); }
 
     GuiManager(const GuiManager&) = delete;
@@ -43,12 +43,17 @@ public:
      */
     void clear();
 
+    /**
+	* @brief Clears up the GuiManager.
+	*/
+    static void shutdown();
+
     /*
      * TODO: Maybe could add a dark mode toggle here.
      */
 
 private:
-    Window m_target_window_;
+    Window& m_target_window_;
     std::vector<Gui*> m_registered_guis_;
 
     /**
@@ -56,12 +61,6 @@ private:
     * @details Sets up the Dear ImGui context and prepares it for rendering.
     */
     void initialise() const;
-
-    /**
-     * @brief Clears up the GuiManager.
-     */
-    static void shutdown();
-
 };
 
 #endif
