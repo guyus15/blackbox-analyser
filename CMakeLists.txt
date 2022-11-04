@@ -30,6 +30,8 @@ set(TARGET_SOURCES src/main.cpp
 				   src/gui/gui_manager.cpp
 				   src/gui/menu_gui.cpp
 				   src/gui/demo_gui.cpp
+				   src/data_sources.cpp
+				   src/common_data.cpp
 				   libs/glad/src/glad.c
 				   libs/imgui/imgui.cpp
 				   libs/imgui/imgui_demo.cpp
