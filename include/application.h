@@ -2,7 +2,7 @@
 #define APPLICATION_H
 
 #include "window.h"
-#include "gui_manager.h"
+#include "gui/gui_manager.h"
 
 #include <memory>
 

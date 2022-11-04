@@ -4,8 +4,8 @@
 #include "application.h"
 #include "window.h"
 
-#include "gui_manager.h"
-#include "menu_gui.h"
+#include "gui/gui_manager.h"
+#include "gui/menu_gui.h"
 
 #include "spdlog/spdlog.h"
 
