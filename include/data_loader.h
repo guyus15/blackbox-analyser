@@ -4,6 +4,8 @@
 #include "data_sources.h"
 #include "common_data.h"
 
+#include "spdlog/spdlog.h"
+
 #include <string>
 #include <type_traits>
 
@@ -18,14 +20,20 @@ public:
     DataLoader() = default;
     ~DataLoader() = default;
 
+    DataLoader(const DataLoader&) = default;
+    DataLoader(DataLoader&&) noexcept = default;
+
+    DataLoader& operator=(const DataLoader&) = default;
+    DataLoader& operator=(DataLoader&&) = default;
+
     /**
      * @brief Loads a log file at the specified filepath based off the given DataSource type
      */
-    CommonData load(const std::string& filepath)
+    [[nodiscard]] CommonData load(const std::string& filepath) const
     {
         SPDLOG_INFO("Loading data source");
 
-        T source;
+        T source{};
 
         CommonData data = static_cast<DataSource*>(&source)->load(filepath);
 

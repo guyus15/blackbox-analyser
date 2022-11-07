@@ -39,6 +39,8 @@ public:
      */
     [[nodiscard]] bool empty() const;
 
+    LogRecord& operator[](const int& index);
+
 private:
     Headers m_headers_;
     std::vector<LogRecord> m_data_;

@@ -14,6 +14,7 @@ struct LogRecord
     // to perform an analysis of the data.
 
     std::string datetime;
+    std::string reply_status;
     std::string flags;
     std::string node;
     std::string channel;

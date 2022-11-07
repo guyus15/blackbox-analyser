@@ -24,3 +24,8 @@ bool CommonData::empty() const
 {
 	return m_data_.empty();
 }
+
+LogRecord& CommonData::operator[](const int& index)
+{
+	return m_data_[index];
+}

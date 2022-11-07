@@ -32,6 +32,7 @@ set(TARGET_SOURCES src/main.cpp
 				   src/gui/demo_gui.cpp
 				   src/data_sources.cpp
 				   src/common_data.cpp
+				   src/utils.cpp
 				   libs/glad/src/glad.c
 				   libs/imgui/imgui.cpp
 				   libs/imgui/imgui_demo.cpp
@@ -39,13 +40,15 @@ set(TARGET_SOURCES src/main.cpp
                    libs/imgui/imgui_tables.cpp
                    libs/imgui/imgui_widgets.cpp
                    libs/imgui/backends/imgui_impl_glfw.cpp
-                   libs/imgui/backends/imgui_impl_opengl3.cpp)
+                   libs/imgui/backends/imgui_impl_opengl3.cpp
+				   libs/tinyfiledialogs/src/tinyfiledialogs.c)
 
 include_directories(include/
 					libs/glad/include
 					libs/glfw/include
 					libs/imgui
-					libs/imgui/backends)
+					libs/imgui/backends
+					libs/tinyfiledialogs/include)
 
 add_executable(${PROJECT_NAME} ${TARGET_SOURCES})
 
