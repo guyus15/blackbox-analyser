@@ -1,4 +1,4 @@
-#include "gui_manager.h"
+#include "gui/gui_manager.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
