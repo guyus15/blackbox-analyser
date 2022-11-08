@@ -61,6 +61,11 @@ private:
     * @details Sets up the Dear ImGui context and prepares it for rendering.
     */
     void initialise() const;
+
+    /**
+     * @brief Sets up the style for Dear ImGui.
+     */
+    static void setup_style();
 };
 
 #endif
