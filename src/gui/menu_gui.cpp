@@ -11,7 +11,8 @@ ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar |
                                 ImGuiWindowFlags_NoCollapse |
                                 ImGuiWindowFlags_NoMove |
                                 ImGuiWindowFlags_NoSavedSettings |
-                                ImGuiWindowFlags_NoResize;
+                                ImGuiWindowFlags_NoResize |
+                                ImGuiWindowFlags_NoBringToFrontOnFocus;
 
 ImGuiTableFlags table_flags = ImGuiTableFlags_ScrollX |
                               ImGuiTableFlags_ScrollY |
