@@ -7,31 +7,38 @@
 #include "tinyfiledialogs.h"
 
 ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoTitleBar |
-								ImGuiWindowFlags_MenuBar |
-								ImGuiWindowFlags_NoCollapse |
-								ImGuiWindowFlags_NoMove |
-								ImGuiWindowFlags_NoSavedSettings |
-								ImGuiWindowFlags_NoResize;
+                                ImGuiWindowFlags_MenuBar |
+                                ImGuiWindowFlags_NoCollapse |
+                                ImGuiWindowFlags_NoMove |
+                                ImGuiWindowFlags_NoSavedSettings |
+                                ImGuiWindowFlags_NoResize;
 
 ImGuiTableFlags table_flags = ImGuiTableFlags_ScrollX |
-							  ImGuiTableFlags_ScrollY |
-							  ImGuiTableFlags_RowBg |
-							  ImGuiTableFlags_NoHostExtendX |
-							  ImGuiTableFlags_BordersOuter |
-							  ImGuiTableFlags_BordersV |
-							  ImGuiTableFlags_Resizable |
-							  ImGuiTableFlags_Reorderable |
-							  ImGuiTableFlags_Hideable;
+                              ImGuiTableFlags_ScrollY |
+                              ImGuiTableFlags_RowBg |
+                              ImGuiTableFlags_NoHostExtendX |
+                              ImGuiTableFlags_BordersOuter |
+                              ImGuiTableFlags_BordersV |
+                              ImGuiTableFlags_Resizable |
+                              ImGuiTableFlags_Reorderable |
+                              ImGuiTableFlags_Hideable;
+
+ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
 
 void MenuGui::render()
 {
     ImGui::Begin("Menu GUI", nullptr, window_flags);
 
+    const ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
+    ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), dockspace_flags);
+
+    ImGui::DockSpace(dockspace_id, ImVec2(0, 0), dockspace_flags);
+
     // Main menu bar
     if (ImGui::BeginMainMenuBar())
     {
-	    if (ImGui::BeginMenu("File"))
-	    {
+        if (ImGui::BeginMenu("File"))
+        {
             if (ImGui::MenuItem("Open", "Ctrl+O"))
             {
                 handle_open();
@@ -43,7 +50,7 @@ void MenuGui::render()
             ImGui::MenuItem("Close", "Alt+F4");
 
             ImGui::EndMenu();
-	    }
+        }
 
         if (ImGui::BeginMenu("Tools"))
         {
@@ -52,7 +59,7 @@ void MenuGui::render()
 
             if (ImGui::BeginMenu("Plotting Tools"))
             {
-				ImGui::MenuItem("Plot Data");
+                ImGui::MenuItem("Plot Data");
 
                 ImGui::EndMenu();
             }
@@ -66,20 +73,6 @@ void MenuGui::render()
     // Controls
     {
         ImGui::Begin("Controls");
-
-        if (ImGui::Button("Load CSV"))
-        {
-            SPDLOG_INFO("Loading CSV file!");
-        }
-
-        ImGui::SameLine();
-
-        if (ImGui::Button("Load data file"))
-        {
-            SPDLOG_INFO("Loading data file");
-        }
-
-        ImGui::Separator();
 
         if (ImGui::ArrowButton("LoadPageLeft", ImGuiDir_Left))
         {

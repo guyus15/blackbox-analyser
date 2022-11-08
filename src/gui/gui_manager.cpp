@@ -18,7 +18,9 @@ void GuiManager::initialise() const
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
-    const ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     // Set the Dear ImGui style.
     ImGui::StyleColorsDark();
@@ -42,9 +44,9 @@ void GuiManager::render() const
     ImGui::NewFrame();
 
 #ifdef IMGUI_HAS_VIEWPORT
-    ImGuiViewport* viewport = ImGui::GetMainViewport();
-    ImGui::SetNextWindowPos(viewport->GetWorkPos());
-    ImGui::SetNextWindowSize(viewport->GetWorkSize());
+    const ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(viewport->Pos);
+    ImGui::SetNextWindowSize(viewport->Size);
     ImGui::SetNextWindowViewport(viewport->ID);
 #else
     const auto [width, height] = m_target_window_.get_window_dimensions();
