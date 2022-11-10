@@ -100,13 +100,15 @@ void MenuGui::render()
         }
         else
         {
-            const int num_columns = static_cast<int>(m_target_data_.get_headers().size());
+            const int num_columns = static_cast<int>(m_target_data_.get_headers().size() + 1); // +1 for the row number column
 
             if (ImGui::BeginTable("Data Table", num_columns, table_flags))
             {
                 ImGui::TableSetupScrollFreeze(0, 1); // Make top row always visible.
 
                 const std::vector<std::string> temp_headers = { "header1", "header2", "header3" }; // Some demo headers.
+
+                ImGui::TableSetupColumn("Row");
 
                 // Loop over data headers here to determine table column names
                 for (const auto& header : m_target_data_.get_headers())
@@ -124,12 +126,14 @@ void MenuGui::render()
                     {
                         ImGui::TableNextRow();
 
+                        ImGui::TableSetColumnIndex(0);
+                        ImGui::Text("%d", row + 1);
 
                         for (int column = 0; column < static_cast<int>(m_target_data_.get_headers().size()); column++)
                         {
                             LogRecord current_record = m_target_data_[row];
 
-                            ImGui::TableSetColumnIndex(column);
+                            ImGui::TableSetColumnIndex(column + 1);
 
                             // Retrieve the relevant field from the log record struct.
                             ImGui::Text("%s", (&current_record.datetime)[column].c_str());
